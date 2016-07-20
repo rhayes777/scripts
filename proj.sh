@@ -96,6 +96,14 @@ while test $# -gt 0; do
                         ssh $PROD_SERVER_USER@$PROD_SERVER_URL 'touch ~/$PROD_SERVER_PATH/wsgi.py'
                         break
                         ;;
+                dev)
+                        update_config ROOT_URL $DEV_SERVER_URL/$name $name
+                        break
+                        ;;
+                prod)
+                        update_config ROOT_URL $PROD_SERVER_URL/$name $name
+                        break
+                        ;;
                 *)
                         break
                         ;;
