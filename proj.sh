@@ -33,15 +33,16 @@ while test $# -gt 0; do
                         cp ~/scripts/res/conf $root/conf
                         cp ~/scripts/res/database.py $root/python/$name
                         cd $root
-                        git init
-                        git add .gitignore
-                        git add *
-                        git commit -m "initial commit"
+                        unset PGPASSWORD
                         psql -U postgres -d postgres -c "create user $name with password '$name';"
                         psql -U postgres -d postgres -c "create database $name with owner $name;"
                         update_config DATABASE_NAME $name $name
                         update_config DATABASE_USER $name $name
                         update_config DATABASE_PASSWORD $name $name
+                        git init
+                        git add .gitignore
+                        git add *
+                        git commit -m "initial commit"
                         break
                         ;;
                 -s|--switch)
