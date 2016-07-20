@@ -9,7 +9,24 @@ from datetime import datetime
 
 from wateraware import app
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://wateraware:rain_shine_toads1@localhost:5432/wateraware'
+import os
+
+DATABASE_NAME = None
+DATABASE_USER = None
+DATABASE_PASSWORD = None
+
+filename = os.path.join(os.path.dirname(__file__), '..', '..', 'conf')
+with open(filename) as conf:
+    for line in conf:
+        line_array = line.split('=')
+        if line_array[0] == "DATABASE_NAME":
+            DATABASE_NAME = line_array[1].strip()
+        if line_array[0] == "DATABASE_USER":
+            DATABASE_USER = line_array[1].strip()
+        if line_array[0] == "DATABASE_PASSWORD":
+            DATABASE_PASSWORD = line_array[1].strip()
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://{}:{}@localhost:5432/{}'.format(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME)
 
 db = SQLAlchemy(app)
 
