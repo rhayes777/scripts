@@ -1,6 +1,18 @@
 #!/bin/bash
 
+function update_config {
+    sed "s/\($1 *= *\).*/\1$2/" ~/projects/$3/conf > temp
+    mv temp ~/projects/$3/conf
+}
+
 source ~/projects/.state
+source ~/projects/$name/conf
+
+if [ $# -eq 0 ]; then
+    cd ~/projects/$name
+    clear;pwd;ls
+    git status
+fi
 
 while test $# -gt 0; do
         case "$1" in
@@ -15,8 +27,18 @@ while test $# -gt 0; do
                         mkdir $root/python/$name
                         virtualenv $root/python
                         echo "name=$name" > ~/projects/.state
+                        cp ~/scripts/res/gitignore $root/.gitignore
+                        cp ~/scripts/res/conf $root/conf
+                        cp ~/scripts/res/database.py $root/python/$name
                         cd $root
                         git init
+                        git add .gitignore
+                        git commit -m "initial commit"
+                        psql -U postgres -d postgres -c "create user $name with password '$name';"
+                        psql -U postgres -d postgres -c "create database $name with owner $name;"
+                        update_config DATABASE_NAME $name $name
+                        update_config DATABASE_USER $name $name
+                        update_config DATABASE_PASSWORD $name $name
                         break
                         ;;
                 -s|--switch)
@@ -50,6 +72,17 @@ while test $# -gt 0; do
                         cd ~/projects/$name/spec
                         clear;pwd;ls
                         git status
+                        break
+                        ;;
+                --state|state)
+                        echo $name
+                        break
+                        ;;
+                db)
+                        export PGPASSWORD=$DATABASE_PASSWORD; psql -U $DATABASE_USER -d $DATABASE_NAME -h localhost -p 5432
+                        break
+                        ;;
+                *)
                         break
                         ;;
                 
