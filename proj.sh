@@ -54,40 +54,28 @@ while test $# -gt 0; do
                         break
                         ;;
                 a|android)
-                        cd ~/projects/$name/android
-                        clear;pwd;ls
-                        git status
+                        go ~/projects/$name/android
                         break
                         ;;
                 i|ios)
-                        cd ~/projects/$name/ios/$name
-                        clear;pwd;ls
-                        git status
+                        go ~/projects/$name/ios/$name
                         break
                         ;;
                 p|python)
-                        cd ~/projects/$name/python/$name
-                        clear;pwd;ls
-                        git status
+                        go ~/projects/$name/python/$name
                         . bin/activate &>/dev/null; . ../bin/activate &>/dev/null
                         break
                         ;;
                 s|spec)
-                        cd ~/projects/$name/spec
-                        clear;pwd;ls
-                        git status
+                        go ~/projects/$name/spec
                         break
                         ;;
                 q|qgis)
-                        cd ~/projects/$name/qgis
-                        clear;pwd;ls
-                        git status
+                        go ~/projects/$name/qgis
                         break
                         ;;
                 r|resources)
-                        cd ~/projects/$name/resources
-                        clear;pwd;ls
-                        git status
+                        go ~/projects/$name/resources
                         break
                         ;;
                 --state|state)
