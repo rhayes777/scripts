@@ -60,7 +60,7 @@ while test $# -gt 0; do
                         break
                         ;;
                 i|ios)
-                        cd ~/projects/$name/ios
+                        cd ~/projects/$name/ios/$name
                         clear;pwd;ls
                         git status
                         break
