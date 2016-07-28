@@ -54,7 +54,7 @@ while test $# -gt 0; do
                         break
                         ;;
                 a|android)
-                        go ~/projects/$name/android
+                        go ~/projects/$name/android/$name
                         break
                         ;;
                 i|ios)
