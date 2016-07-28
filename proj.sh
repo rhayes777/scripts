@@ -78,6 +78,18 @@ while test $# -gt 0; do
                         git status
                         break
                         ;;
+                q|qgis)
+                        cd ~/projects/$name/qgis
+                        clear;pwd;ls
+                        git status
+                        break
+                        ;;
+                r|resources)
+                        cd ~/projects/$name/resources
+                        clear;pwd;ls
+                        git status
+                        break
+                        ;;
                 --state|state)
                         echo $name
                         break
