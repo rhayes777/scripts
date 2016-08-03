@@ -104,6 +104,10 @@ while test $# -gt 0; do
                         update_config ROOT_URL $PROD_SERVER_URL/$name $name
                         break
                         ;;
+                pc)
+                        charm ~/projects/$name/python &
+                        break
+                        ;;
                 *)
                         break
                         ;;
