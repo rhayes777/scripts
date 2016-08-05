@@ -55,6 +55,7 @@ while test $# -gt 0; do
                         ;;
                 a|android)
                         go ~/projects/$name/android/$name
+                        open -a /Applications/Android\ Studio.app .
                         break
                         ;;
                 i|ios)
