@@ -50,7 +50,7 @@ while test $# -gt 0; do
                         cd ~/projects/$name
                         clear;pwd;ls
                         git status
-                        echo $name > ~/projects/.state
+                        echo "name=$name" > ~/projects/.state
                         break
                         ;;
                 a|android)
