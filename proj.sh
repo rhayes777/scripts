@@ -60,6 +60,7 @@ while test $# -gt 0; do
                         ;;
                 i|ios)
                         go ~/projects/$name/ios/$name
+                        open *.xcworkspace
                         break
                         ;;
                 p|python)
