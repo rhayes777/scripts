@@ -117,7 +117,7 @@ while test $# -gt 0; do
                         convert $2 -resize 33% ~/projects/$name/android/$name/app/src/main/res/drawable-hdpi/$2
                         convert $2 -resize 17% ~/projects/$name/android/$name/app/src/main/res/drawable-mdpi/$2
                         fileroot=${2%.*}
-                        ios_path="$HOME/projects/$name/ios/$name/$name/Assets.xcassets/$fileroot"
+                        ios_path="$HOME/projects/$name/ios/$name/$name/Assets.xcassets/$fileroot.imageset"
                         mkdir $ios_path
                         echo '{"images" : [{"idiom" : "universal", "filename" : "'$fileroot'.png", "scale" : "1x"    },    {      "idiom" : "universal",      "filename" : "'$fileroot'@2x.png",      "scale" : "2x"    },    {      "idiom" : "universal",      "filename" : "'$fileroot'@3x.png",      "scale" : "3x"    }  ],  "info" : {    "version" : 1,    "author" : "xcode"  }}' > $ios_path"/Contents.json"
                         convert $2 -resize 100% $ios_path"/$fileroot@3x.png"
