@@ -110,6 +110,15 @@ while test $# -gt 0; do
                         charm ~/projects/$name/python &
                         break
                         ;;
+                -r)     
+                        convert $2 -resize 100% ~/projects/$name/android/$name/app/src/main/res/drawable-xxxhdpi/$2
+                        convert $2 -resize 75% ~/projects/$name/android/$name/app/src/main/res/drawable-xxhdpi/$2
+                        convert $2 -resize 50% ~/projects/$name/android/$name/app/src/main/res/drawable-xhdpi/$2
+                        convert $2 -resize 33% ~/projects/$name/android/$name/app/src/main/res/drawable-hdpi/$2
+                        convert $2 -resize 17% ~/projects/$name/android/$name/app/src/main/res/drawable-mdpi/$2
+                        shift
+                        break
+                        ;;
                 *)
                         break
                         ;;
