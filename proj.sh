@@ -55,10 +55,18 @@ while test $# -gt 0; do
                         ;;
                 a|android)
                         go ~/projects/$name/android/$name
+                        break
+                        ;;
+                as)
+                        go ~/projects/$name/android/$name
                         open -a /Applications/Android\ Studio.app .
                         break
                         ;;
                 i|ios)
+                        go ~/projects/$name/ios/$name
+                        break
+                        ;;
+                xc)
                         go ~/projects/$name/ios/$name
                         open *.xcworkspace
                         break
