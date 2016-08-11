@@ -18,10 +18,16 @@ fi
 
 while test $# -gt 0; do
         case "$1" in
-                -n|--new)
+                init)
                         name=$2
                         root=~/projects/$name
                         mkdir $root
+                        break
+                        ;;
+                install)
+                        break
+                        ;;
+                -n|--new)
                         mkdir $root/spec
                         mkdir $root/ios
                         mkdir $root/android
