@@ -6,7 +6,10 @@ function update_config {
 }
 
 source ~/projects/.state
-source ~/projects/$name/conf
+
+if [[ -f "$HOME/projects/$name/conf" ]]; then
+    source ~/projects/$name/conf
+fi
 
 root=~/projects/$name
 
@@ -20,35 +23,85 @@ while test $# -gt 0; do
         case "$1" in
                 init)
                         name=$2
+                        echo "name=$name" > ~/projects/.state
                         root=~/projects/$name
                         mkdir $root
-                        break
-                        ;;
-                install)
-                        break
-                        ;;
-                -n|--new)
-                        mkdir $root/spec
-                        mkdir $root/ios
-                        mkdir $root/android
-                        mkdir $root/python
-                        mkdir $root/python/$name
-                        virtualenv $root/python
-                        echo "name=$name" > ~/projects/.state
                         cp ~/scripts/res/gitignore $root/.gitignore
-                        cp ~/scripts/res/conf $root/conf
-                        cp ~/scripts/res/database.py $root/python/$name
+                        cp ~/scripts/res/conf $root/
+                        cp ~/scripts/res/proj $root/
                         cd $root
-                        unset PGPASSWORD
-                        psql -U postgres -d postgres -c "create user $name with password '$name';"
-                        psql -U postgres -d postgres -c "create database $name with owner $name;"
-                        update_config DATABASE_NAME $name $name
-                        update_config DATABASE_USER $name $name
-                        update_config DATABASE_PASSWORD $name $name
+                        open proj
                         git init
                         git add .gitignore
                         git add *
                         git commit -m "initial commit"
+                        break
+                        ;;
+                install)
+                        cd $root
+                        git commit -am "before installation"
+                        file="proj"
+                        while read -r line; do
+                            [[ "$line" =~ ^#.*$ ]] && continue
+                            case "$line" in 
+                                        ios)    
+                                                if [ ! -d "$root/ios" ]; then
+                                                    mkdir $root/ios
+                                                fi
+                                                continue
+                                                ;;
+                                        android)
+                                                if [ ! -d "$root/android" ]; then
+                                                    mkdir $root/android
+                                                fi
+                                                continue
+                                                ;;
+                                        python)
+                                                if [ ! -d "$root/python" ]; then
+                                                    mkdir $root/python
+                                                    mkdir $root/python/$name
+                                                    virtualenv $root/python
+                                                    cp ~/scripts/res/database.py $root/python/$name
+                                                fi
+                                                continue
+                                                ;;
+                                        ionic)
+                                                if [ ! -d "$root/ionic" ]; then
+                                                    mkdir $root/ionic
+                                                fi
+                                                continue
+                                                ;;
+                                        postgres)
+                                                unset PGPASSWORD
+                                                psql -U postgres -d postgres -c "create user $name with password '$name';"
+                                                psql -U postgres -d postgres -c "create database $name with owner $name;"
+                                                update_config DATABASE_NAME $name $name
+                                                update_config DATABASE_USER $name $name
+                                                update_config DATABASE_PASSWORD $name $name
+                                                continue
+                                                ;;
+                                        spec)
+                                                if [ ! -d "mkdir $root/spec" ]; then
+                                                    mkdir $root/spec
+                                                fi
+                                                continue
+                                                ;;
+                                        requirements)
+                                                if [ ! -d "mkdir $root/requirements" ]; then
+                                                    mkdir $root/requirements
+                                                fi
+                                                continue
+                                                ;;
+                                        resources)
+                                                if [ ! -d "mkdir $root/resources" ]; then
+                                                    mkdir $root/resources
+                                                fi
+                                                continue
+                                                ;;
+                            esac
+                        done < "$file"
+                        git add *
+                        git commit -m "after installation"
                         break
                         ;;
                 -s|--switch)
@@ -154,3 +207,4 @@ while test $# -gt 0; do
                 
         esac
 done
+
