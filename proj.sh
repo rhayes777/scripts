@@ -96,6 +96,14 @@ while test $# -gt 0; do
                         export PGPASSWORD=$DATABASE_PASSWORD; psql -U $DATABASE_USER -d $DATABASE_NAME -h localhost -p 5432
                         break
                         ;;
+                sshd)
+                        ssh $DEV_SERVER_USER@$DEV_SERVER_URL -p $DEV_SERVER_PORT
+                        break
+                        ;;
+                sshp)
+                        ssh $PROD_SERVER_USER@$PROD_SERVER_URL -p $PROD_SERVER_PORT
+                        break
+                        ;;
                 syncd)
                         rsync -e ssh -a $root/python/$name/ $DEV_SERVER_USER@$DEV_SERVER_URL:$DEV_SERVER_PATH/$name/
                         ssh $DEV_SERVER_USER@$DEV_SERVER_URL '. ~/$DEV_SERVER_PATH/$name/apache2/bin/restart'
