@@ -135,6 +135,12 @@ while test $# -gt 0; do
                         . bin/activate &>/dev/null; . ../bin/activate &>/dev/null
                         break
                         ;;
+                prun)
+                        go ~/projects/$name/python/$name
+                        . bin/activate &>/dev/null; . ../bin/activate &>/dev/null
+                        python ../__init__.py
+                        break
+                        ;;
                 s|spec)
                         go ~/projects/$name/spec
                         break
@@ -161,6 +167,14 @@ while test $# -gt 0; do
                         ;;
                 sshp)
                         ssh $PROD_SERVER_USER@$PROD_SERVER_URL -p $PROD_SERVER_PORT
+                        break
+                        ;;
+                sshdt)
+                        ssh -L 9999:127.0.0.1:5432 $DEV_SERVER_USER@$DEV_SERVER_URL -p $DEV_SERVER_PORT
+                        break
+                        ;;
+                sshpt)
+                        ssh -L 9999:127.0.0.1:5432 $PROD_SERVER_USER@$PROD_SERVER_URL -p $PROD_SERVER_PORT
                         break
                         ;;
                 syncd)
