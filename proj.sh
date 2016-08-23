@@ -169,6 +169,10 @@ while test $# -gt 0; do
                         ssh $PROD_SERVER_USER@$PROD_SERVER_URL -p $PROD_SERVER_PORT
                         break
                         ;;
+                rp)
+                        ssh $PROD_SERVER_USER@$PROD_SERVER_URL -p $PROD_SERVER_PORT 'touch $HOME/website/wsgi.py'
+                        break
+                        ;;
                 sshdt)
                         ssh -L 9999:127.0.0.1:5432 $DEV_SERVER_USER@$DEV_SERVER_URL -p $DEV_SERVER_PORT
                         break
