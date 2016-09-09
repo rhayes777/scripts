@@ -140,6 +140,11 @@ while test $# -gt 0; do
                         open www/templates
                         break
                         ;;
+                issues)
+                        go ~/projects/$name
+                        open issues*
+                        break
+                        ;;
                 p|python)
                         go ~/projects/$name/python/$name
                         . bin/activate &>/dev/null; . ../bin/activate &>/dev/null
