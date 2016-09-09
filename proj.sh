@@ -130,6 +130,16 @@ while test $# -gt 0; do
                         open *.xcworkspace
                         break
                         ;;
+                io)
+                        go ~/projects/$name/ionic
+                        break
+                        ;;
+                ion)
+                        go ~/projects/$name/ionic
+                        open www/js/controllers.js
+                        open www/templates
+                        break
+                        ;;
                 p|python)
                         go ~/projects/$name/python/$name
                         . bin/activate &>/dev/null; . ../bin/activate &>/dev/null
