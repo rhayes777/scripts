@@ -137,6 +137,7 @@ while test $# -gt 0; do
                 ion)
                         go ~/projects/$name/ionic
                         open www/js/controllers.js
+                        open www/js/services.js
                         open www/templates
                         break
                         ;;
