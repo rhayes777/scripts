@@ -112,6 +112,10 @@ while test $# -gt 0; do
                         echo "name=$name" > ~/projects/.state
                         break
                         ;;
+                all)
+                        ls ~/projects/
+                        break
+                        ;;
                 a|android)
                         go ~/projects/$name/android/$name
                         break
@@ -219,6 +223,10 @@ while test $# -gt 0; do
                         charm ~/projects/$name/python &
                         break
                         ;;
+                ignore)
+                        vim ~/projects/$name/.gitignore
+                        break
+                        ;;
                 -r)     
                         convert $2 -resize 100% ~/projects/$name/android/$name/app/src/main/res/drawable-xxxhdpi/$2
                         convert $2 -resize 75% ~/projects/$name/android/$name/app/src/main/res/drawable-xxhdpi/$2
@@ -238,6 +246,7 @@ while test $# -gt 0; do
                 *)
                         break
                         ;;
+                
                 
         esac
 done
