@@ -227,6 +227,10 @@ while test $# -gt 0; do
                         vim ~/projects/$name/.gitignore
                         break
                         ;;
+                g)
+                        go ~/projects/$name/qgis
+                        break
+                        ;;
                 -r)     
                         convert $2 -resize 100% ~/projects/$name/android/$name/app/src/main/res/drawable-xxxhdpi/$2
                         convert $2 -resize 75% ~/projects/$name/android/$name/app/src/main/res/drawable-xxhdpi/$2
