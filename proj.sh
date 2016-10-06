@@ -73,11 +73,12 @@ while test $# -gt 0; do
                                                 ;;
                                         postgres)
                                                 unset PGPASSWORD
-                                                psql -U postgres -d postgres -c "create user $name with password '$name';"
-                                                psql -U postgres -d postgres -c "create database $name with owner $name;"
-                                                update_config DATABASE_NAME $name $name
-                                                update_config DATABASE_USER $name $name
-                                                update_config DATABASE_PASSWORD $name $name
+                                                dbname=$(echo $name | perl -ne 'print lc(join("_", split(/(?=[A-Z])/)))')
+                                                psql -U postgres -d postgres -c "create user $dbname with password '$dbname';"
+                                                psql -U postgres -d postgres -c "create database $dbname with owner $dbname;"
+                                                update_config DATABASE_NAME $dbname $name
+                                                update_config DATABASE_USER $dbname $name
+                                                update_config DATABASE_PASSWORD $dbname $name
                                                 continue
                                                 ;;
                                         spec)
