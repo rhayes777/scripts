@@ -152,8 +152,9 @@ while test $# -gt 0; do
                         break
                         ;;
                 p|python)
+                        go ~/projects/$name/python
+                        . bin/activate &>/dev/null;
                         go ~/projects/$name/python/$name
-                        . bin/activate &>/dev/null; . ../bin/activate &>/dev/null
                         break
                         ;;
                 prun)
@@ -180,6 +181,7 @@ while test $# -gt 0; do
                         ;;
                 db)
                         export PGPASSWORD=$DATABASE_PASSWORD; psql -U $DATABASE_USER -d $DATABASE_NAME -h localhost -p 5432
+                        unset PGPASSWORD
                         break
                         ;;
                 sshd)
@@ -222,6 +224,10 @@ while test $# -gt 0; do
                         ;;
                 pc)
                         charm ~/projects/$name/python &
+                        break
+                        ;;
+                conf)
+                        vim ~/projects/$name/conf
                         break
                         ;;
                 ignore)
