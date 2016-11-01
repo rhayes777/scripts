@@ -7,6 +7,8 @@ function update_config {
 
 source ~/projects/.state
 
+export p="$HOME/projects/$name"
+
 if [[ -f "$HOME/projects/$name/conf" ]]; then
     source ~/projects/$name/conf
 fi
