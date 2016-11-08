@@ -21,6 +21,14 @@ if [ $# -eq 0 ]; then
     git status
 fi
 
+_codeComplete()
+{
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $(compgen -W "$(ls $HOME/projects/)" -- $cur) )
+}
+
+complete -F _codeComplete proj.sh
+
 while test $# -gt 0; do
         case "$1" in
                 init)
@@ -153,6 +161,10 @@ while test $# -gt 0; do
                         open issues*
                         break
                         ;;
+                pod)
+                        vim ~/projects/$name/ios/$name/Podfile
+                        break
+                        ;;
                 p|python)
                         go ~/projects/$name/python
                         . bin/activate &>/dev/null;
@@ -238,6 +250,22 @@ while test $# -gt 0; do
                         ;;
                 g)
                         go ~/projects/$name/qgis
+                        break
+                        ;;
+                t)
+                        xcodebuild   -workspace $name.xcworkspace   -scheme $name   -sdk iphonesimulator   -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3'   test | xcpretty --test --color
+                        python ~/projects/$name/python/unittests.py
+                        break
+                        ;;
+                tp)
+                        go ~/projects/$name/python
+                        . bin/activate &>/dev/null;
+                        python ~/projects/$name/python/unittests.py
+                        break
+                        ;;
+                ti)
+                        go ~/projects/$name/ios/$name
+                        xcodebuild   -workspace $name.xcworkspace   -scheme $name   -sdk iphonesimulator   -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3'   test | xcpretty --test --color
                         break
                         ;;
                 -r)     
