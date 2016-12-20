@@ -198,6 +198,11 @@ while test $# -gt 0; do
                         unset PGPASSWORD
                         break
                         ;;
+                dbt)
+                        export PGPASSWORD=$DATABASE_PASSWORD; psql -U $DATABASE_USER -d $DATABASE_NAME'_test' -h localhost -p 5432
+                        unset PGPASSWORD
+                        break
+                        ;;
                 sshd)
                         ssh $DEV_SERVER_USER@$DEV_SERVER_URL -p $DEV_SERVER_PORT
                         break
