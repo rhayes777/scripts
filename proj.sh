@@ -84,8 +84,10 @@ while test $# -gt 0; do
                                         postgres)
                                                 unset PGPASSWORD
                                                 dbname=$(echo $name | perl -ne 'print lc(join("_", split(/(?=[A-Z])/)))')
+                                                dbtestname=$dbname'_test'
                                                 psql -U postgres -d postgres -c "create user $dbname with password '$dbname';"
                                                 psql -U postgres -d postgres -c "create database $dbname with owner $dbname;"
+                                                psql -U postgres -d postgres -c "create database $dbtestname with owner $dbname;"
                                                 update_config DATABASE_NAME $dbname $name
                                                 update_config DATABASE_USER $dbname $name
                                                 update_config DATABASE_PASSWORD $dbname $name
