@@ -291,6 +291,10 @@ while test $# -gt 0; do
                         shift
                         break
                         ;;
+                endpoints)
+                        grep -no '@app.route([^"]*)' ~/projects/$name/python/$name/view_controller.py | sed -e "s/@app.route('//g" -e "s/,//g" -e "s/methods=//g" -e "s/PUT//g" -e "s/PATCH//g" -e "s/POST//g" -e "s/GET//g"   -e "s/'//g" -e "s/)//g" -e "s/^[0-9]*://g" -e "s/DELETE//g" -e "s/\[//g" -e "s/\]//g"
+                        break
+                        ;;
                 *)
                         break
                         ;;
