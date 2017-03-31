@@ -120,6 +120,7 @@ while test $# -gt 0; do
                 -s|--switch)
                         name=$2
                         cd ~/projects/$name
+                        . ./.projprofile
                         clear;pwd;ls
                         git status
                         echo "name=$name" > ~/projects/.state
