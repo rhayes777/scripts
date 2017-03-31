@@ -126,6 +126,10 @@ while test $# -gt 0; do
                         echo "name=$name" > ~/projects/.state
                         break
                         ;;
+                editprojprofile)
+                        vim ~/projects/$name/.projprofile
+                        break
+                        ;;
                 all)
                         ls ~/projects/
                         break
